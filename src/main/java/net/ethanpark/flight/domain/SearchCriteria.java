@@ -221,8 +221,29 @@ public class SearchCriteria {
             && searchTokenInfo.getRouteSearchMode() != RouteSearchMode.None;
    }
 
+   /**
+    * 几天之内出发（出发日期和今天的间隔天数）。0：今天；1：明天；2：后天；...
+    * 
+    * @return
+    */
    public int departDays() {
       throw new UnsupportedOperationException();
+   }
+
+   /**
+    * 返回完整的SalesType，带SubChannelID（仅当SubChannelID>0）。分隔符为"_"。
+    * 
+    * @return
+    */
+   public String getFullSalesType() {
+      String salesType = getSalesType().toString();
+
+      int id = subChannelId;
+      if (id > 0) {
+         salesType = String.format("%s_%d", salesType, id);
+      }
+
+      return salesType;
    }
    //endregion
 }
